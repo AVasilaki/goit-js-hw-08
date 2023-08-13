@@ -21,6 +21,9 @@ if (parceData) {
 
 form.addEventListener('submit', handlerSubmit);
 function handlerSubmit(evt) {
+  if (input.value === '' || texyArea.value === '') {
+    return alert('Please fill in all the fields!');
+  }
   evt.preventDefault();
   localStorage.removeItem(key);
   form.reset();
