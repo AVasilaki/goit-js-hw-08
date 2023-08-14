@@ -1,17 +1,16 @@
 import throttle from 'lodash.throttle';
 const form = document.querySelector('.feedback-form');
-const input = document.querySelector('input');
-const texyArea = document.querySelector('textarea');
+
 const key = 'feedback-form-state';
 let formData = {};
 const getData = localStorage.getItem(key);
 const parceData = JSON.parse(getData);
 if (parceData) {
-  input.value = parceData.email;
-  texyArea.value = parceData.message;
+  form.elements.email.value = parceData.email;
+  form.elements.message.value = parceData.message;
 }
 form.addEventListener('input', throttle(handlerInput, 500));
-function handlerInput(event) {
+function handlerInput() {
   const userData = {
     email: form.elements.email.value,
     message: form.elements.message.value,
@@ -22,7 +21,7 @@ function handlerInput(event) {
 
 form.addEventListener('submit', handlerSubmit);
 function handlerSubmit(evt) {
-  if (input.value === '' || texyArea.value === '') {
+  if (form.elements.email.value === '' || form.elements.message.value === '') {
     return alert('Please fill in all the fields!');
   }
   evt.preventDefault();
