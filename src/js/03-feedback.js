@@ -3,6 +3,7 @@ const form = document.querySelector('.feedback-form');
 
 const key = 'feedback-form-state';
 let formData = {};
+
 const getData = localStorage.getItem(key);
 const parceData = JSON.parse(getData);
 if (parceData) {
@@ -15,7 +16,7 @@ function handlerInput() {
     email: form.elements.email.value,
     message: form.elements.message.value,
   };
-  formData = userData;
+  // formData = userData;
   localStorage.setItem(key, JSON.stringify(userData));
 }
 
@@ -25,6 +26,10 @@ function handlerSubmit(evt) {
     return alert('Please fill in all the fields!');
   }
   evt.preventDefault();
+  formData = {
+    email: form.elements.email.value,
+    message: form.elements.message.value,
+  };
   console.log(formData);
   localStorage.removeItem(key);
   form.reset();
